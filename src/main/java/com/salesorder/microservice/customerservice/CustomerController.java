@@ -24,6 +24,9 @@ public class CustomerController {
 	@Autowired
 	private SalesOrderService salesOrderService;
 	
+	//@Autowired
+	private CustomerService customerService;
+	
 	@GetMapping("/customers")
 	public List<Customer> getAllCustomers(){
 		log.info("Inside getAllCustomers");		
@@ -39,6 +42,7 @@ public class CustomerController {
 		customer.setId(id);
 		customerRepository.save(customer);
 		salesOrderService.createCustomerByEvent(new CustomerSOS(id, customer.getFirstName(), customer.getLastName(), customer.getEmail()));
+		//customerService.createCustomer(customer);
 		return id;
 		
 	}
